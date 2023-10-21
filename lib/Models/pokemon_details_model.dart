@@ -19,6 +19,20 @@ class PokemonDetailsModel {
     sprites = json['sprites'] != null ? new Sprites.fromJson(json['sprites']) : null;
     weight = json['weight'];
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['height'] = this.height;
+    data['weight'] = this.weight;
+    if (this.abilities != null) {
+      data['results'] = this.abilities!.map((v) => v.toJson()).toList();
+    }
+    if (this.sprites != null) {
+      data['sprites'] = this.sprites!.toJson();
+    }
+    return data;
+  }
 }
 
 class Abilities {

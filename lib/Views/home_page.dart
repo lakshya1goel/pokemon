@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                   child: ListTile(
                     title: Text(snapshot.data!.results![index].name!),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(url: snapshot.data!.results![index].url!)));
                     },
                   ),
                 );
