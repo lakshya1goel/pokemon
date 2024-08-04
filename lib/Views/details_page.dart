@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon/Controller/pokemon_details_controller.dart';
 import 'package:pokemon/Models/pokemon_details_model.dart';
+import 'package:http/http.dart' as http;
 
 class DetailsPage extends StatefulWidget {
   final String url;
@@ -18,7 +19,7 @@ class _DetailsPageState extends State<DetailsPage> {
         title: Text("Details"),
       ),
       body: FutureBuilder<PokemonDetailsModel?> (
-        future: getDetails(widget.url),
+        future: getDetails(widget.url, http.Client()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

@@ -2,26 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pokemon/Models/pokemon_list_model.dart';
 
-Future<PokemonListModel?> getData() async {
-  try {
-    final response = await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon"));
+Future<PokemonListModel> getData(http.Client http) async {
+  final response =
+      await http.get(Uri.parse("https://pokeapi.co/api/v2/pokemon"));
 
-    if (response.statusCode == 200) {
-      if (response.body != null && response.body.isNotEmpty) {
-        print(response.body);
-        print(PokemonListModel.fromJson(json.decode(response.body)));
-        return PokemonListModel.fromJson(json.decode(response.body));
-      }
-      else {
-        print("Error: Response body is empty");
-      }
-    }
-    else {
-      print("Error: ${response.statusCode}");
-    }
+  if (response.statusCode == 200) {
+    final jsonResponse = json.decode(response.body);
+    return PokemonListModel.fromJson(jsonResponse);
   }
-  catch (error) {
-    print("Error: $error");
-  }
-  return null;
+  throw Exception('Failed to load data');
 }

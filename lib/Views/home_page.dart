@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokemon/Controller/pokemon_controller.dart';
 import 'package:pokemon/Models/pokemon_list_model.dart';
 import 'package:pokemon/Views/details_page.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("Welcome to the World of Pokemons!"),
       ),
       body: FutureBuilder<PokemonListModel?> (
-        future: getData(),
+        future: getData(http.Client()),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
